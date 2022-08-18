@@ -1,0 +1,20 @@
+#
+# 
+# Auteur : ABOTCHI Kodjo Mawugno
+# 
+# 
+# date : 2022-08-16
+#
+#
+
+
+RewriteEngine On # Activer le module Rewrite
+
+# Les controllers   
+
+RewriteRule ^ouvrages$ controllers/ouvrage.php [L]
+
+
+
+
+
