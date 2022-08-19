@@ -36,6 +36,7 @@ CREATE TABLE Reservations(
     id bigint AUTO_INCREMENT NOT NULL,
     uuid VARCHAR(38) NOT NULL,
     client bigint NOT NULL,
+    books longtext not null,
     created_at DATETIME DEFAULT NOW(),
     PRIMARY KEY(id),
     CONSTRAINT u_reservations_uuid UNIQUE(uuid),
@@ -55,7 +56,6 @@ CREATE TABLE Categories(
     CONSTRAINT u_books_uuid UNIQUE(uuid),
     CONSTRAINT u_categories_name UNIQUE(name),
     CONSTRAINT fk_categories_administrators FOREIGN KEY(author) REFERENCES Administrators(id)
-
 
 ) engine = innodb default charset utf8;  
 
@@ -98,7 +98,7 @@ CREATE TABLE Books(
     id bigint AUTO_INCREMENT NOT NULL,
     uuid VARCHAR(38) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL, 
+    resume TEXT NOT NULL, 
     writer BIGINT NOT NULL,
     category bigint NOT NULL, 
     author SMALLINT NOT NULL, 
@@ -121,6 +121,7 @@ CREATE TABLE Loans(
     uuid VARCHAR(38) NOT NULL,
     client_name VARCHAR(230) NOT NULL,
     client_phone INT(16) NOT NULL,
+    books longtext not null,
     author SMALLINT NOT NULL, -- celui qui realise l'action
     returned ENUM('true','false') NOT NULL,
     returned_at DATETIME DEFAULT NULL,
@@ -130,27 +131,3 @@ CREATE TABLE Loans(
     CONSTRAINT fk_loans_administrators FOREIGN KEY(author) REFERENCES Administrators(id)
 
 ) engine = innodb default charset utf8;
-
-
-
-CREATE TABLE  Books_loans(  -- table d'assosciation emprunt livres
-    id BIGINT auto_increment NOT null,
-    book BIGINT not null,
-    loan bigint not null,
-    created_at DATETIME DEFAULT NOW(),
-    PRIMARY KEY(id),   
-    CONSTRAINT fk_loans_books FOREIGN KEY(book) REFERENCES Books(id),
-    CONSTRAINT fk_books_loans FOREIGN KEY(loan) REFERENCES Loans(id)
-
-)engine = innodb default charset utf8;
-
-CREATE TABLE  Books_reservations( -- table d'assosciation reservation livres
-    id BIGINT auto_increment NOT null,
-    book BIGINT not null,
-    reservation bigint not null,
-    created_at DATETIME DEFAULT NOW(),
-    PRIMARY KEY(id),   
-    CONSTRAINT fk_reservations_books FOREIGN KEY(book) REFERENCES Books(id),
-    CONSTRAINT fk_books_reservations FOREIGN KEY(reservation) REFERENCES Reservations(id)
-
-)engine = innodb default charset utf8;

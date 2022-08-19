@@ -13,6 +13,7 @@ RewriteEngine On # Activer le module Rewrite
 # Les controllers   
 
 RewriteRule ^ouvrages$ controllers/ouvrage.php [L]
+RewriteRule ^accueil$ controllers/home.php [L]
 
 
 
