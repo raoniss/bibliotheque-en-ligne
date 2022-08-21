@@ -35,7 +35,7 @@
 
                 parent::__construct("mysql:host=localhost;dbname=$db_name", $db_user , $db_password , $pdo_options );
                 
-                
+                echo $db_name;
                 
             }
             catch(\Exception $e)

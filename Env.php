@@ -17,13 +17,13 @@
         public function __construct(
             
             // Le nom de la base de donnée
-            $_db_name = "",
+            $_db_name = "bib",
 
             // L'utilisateur de la base de donnée
-            $_db_user = "",
+            $_db_user = "root",
             
             // Le mot de passe de la base de donnée
-            $_db_password =  "root"
+            $_db_password =  ""
             
             
             ){
