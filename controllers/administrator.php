@@ -5,12 +5,14 @@ use core\Password;
 use core\Uuid;
 use models\Administrator;
 use views\Administrator as ViewsAdministrator;
-echo "admins";
 
 
-    if(isset($_GET['list'])) //( new ViewsAdministrator())->_list((new Administrator())->_get());
+   
+
+    if(isset($_GET['list'])) echo "liste";//( new ViewsAdministrator())->_list((new Administrator())->_get());
 
     if(isset($_POST['insert']) && $_SESSION['USER_SUPER'] == "true"){
+        
         $insert = ((new Administrator())->_insert([
             "uuid" => (new Uuid())->_uuid(),
             "name" => htmlspecialchars($_POST['name']),
@@ -22,6 +24,7 @@ echo "admins";
 
         if($insert['status'] == !0) echo $insert['id'] ; ////(new ViewsAdministrator())->_insert();
     }
+    
 
     if(isset($_POST['update']) && $_SESSION['USER_SUPER'] == "true"){
         $insert = ((new Administrator())->_update([
@@ -63,8 +66,13 @@ echo "admins";
             $_SESSION['USER_ID'] = $connected['user']['id'];
             $_SESSION['USER_SUPER'] = $connected['user']['super'];
 
+            echo $_SESSION['USER_NAME']. " ". $_SESSION['USER_EMAIL'];
 
             //(new ViewsAdministrator())->_home();
+        }
+        else{
+            echo " vOUS ETES PAS AUTORISE";
+
         };
     }
 
@@ -72,6 +80,10 @@ echo "admins";
         $enable = (new Administrator())->_enable_super([
             "uuid"=> htmlspecialchars($_POST['uuid'])
         ]);
+
+        $message = ($enable['status'] == !0) ?  "super set" :"operation failed" ;
+
+        echo $message;
     }
 
     if(isset($_POST['disable']) && $_SESSION['USER_SUPER'] == "true"){
@@ -79,7 +91,10 @@ echo "admins";
             "uuid"=> htmlspecialchars($_POST['uuid'])
         ]);
 
-        if($disable['status'] == !0) ;//(new ViewsAdministrator())->_list()
+        //if($disable['status'] == !0) ;//(new ViewsAdministrator())->_list()
+        $message = ($disable['status'] == !0) ?  "super set" :"operation failed" ;
+
+        echo $message;
     }
 
     if(isset($_POST['disconnexion'])) session_abort();

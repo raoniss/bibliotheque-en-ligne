@@ -16,7 +16,7 @@
             [
                 ':uuid' => $_data['uuid'],
                 ':name'=> $_data['name'], 
-                ':first_name' => $_data[':first_name'],
+                ':first_name' => $_data['first_name'],
                 ':email' => $_data['email'],
                 ':password' => $_data['password']
                 
@@ -108,20 +108,21 @@
 
         public function _get_by_mail($_email){
 
-            $data = $this->_query("SELECT uuid, name, fist_name, email FROM Administrators WHERE email = '$_email'");
+            $data = $this->_query("SELECT * FROM Administrators WHERE email = '$_email'");
 
             return $data['data'];
         }
         
         public function _chek_email($_email){
 
-            $data = $this -> _query(" SELECT id FROM Administrators WHERE email = '$_email' ");
+            $data = $this -> _query(" SELECT id, password FROM Administrators WHERE email = '$_email' ");
 
-            if(count($data['data']) == 1){
+            if($data['status'] == !0){
 
                 return [
                     'status' => !0,
-                    'id' => $data['data'][0]["id"]
+                    'id' => $data['data'][0]["id"],
+                    'password' => $data['data'][0]["password"]
                 ];
             }
             else{
@@ -159,10 +160,12 @@
                     return [
                         'status' => !0,
                         'user' => [
-                            'uuid' => $data['uuid'],
+                            'uuid' => $data[0]['uuid'],
                             'name' => $data[0]['name'],
                             'first_name' => $data[0]['first_name'],
-                            'email' => $data[0]['email']
+                            'email' => $data[0]['email'],
+                            'super' => $data[0]['super'],
+                            'id' => $data[0]['id'],
                         ]
                     ];
                 }
@@ -195,6 +198,11 @@
                 return [
                     'status' => !0,
                     'id' =>  $this-> _get_id($_data['uuid'])['id']
+                ];
+            }
+            else{
+                return [
+                    'status' => !1
                 ];
             }
         }

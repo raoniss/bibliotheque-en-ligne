@@ -16,8 +16,6 @@ RewriteRule ^ouvrages$ controllers/ouvrage.php [L]
 RewriteRule ^accueil$ controllers/home.php [L]
 RewriteRule ^admins$ controllers/administrator.php [L]
 RewriteRule ^reservations$ controllers/reservation.php [L]
-RewriteRule ^admins$ controllers/administrator.php [L]
-
 
 
 
