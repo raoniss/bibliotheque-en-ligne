@@ -12,7 +12,7 @@
     require_once("../core/DB.php");
     use \core\DB;
 
-    class Files extends DB{
+    class File extends DB{
         public function __construct(){
 
             parent::__construct();
@@ -87,7 +87,7 @@
         
         }
 
-        public function _update($_data){
+       /* public function _update($_data){
 
             $id_table = $_data['id_table'];
 
@@ -114,7 +114,7 @@
                     
             }
 
-        }
+        }*/
 
         public function _get_id( $_uuid ){
         
@@ -130,7 +130,7 @@
 
         public function _get_by_id($_id){
 
-            $data = $this -> _query(" SELECT CONCAT(name, '.', extension) AS _image FROM files WHERE _id = $_id ");
+            $data = $this -> _query(" SELECT CONCAT(name, '.', extension) AS image FROM files WHERE _id = $_id ");
 
             return $data['data'][0]['_image'];
         }

@@ -102,10 +102,11 @@ CREATE TABLE  Files(
 CREATE TABLE Books(
     id bigint AUTO_INCREMENT NOT NULL,
     uuid VARCHAR(38) NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(160) NOT NULL,
     resume TEXT NOT NULL, 
     writer BIGINT NOT NULL,
     category bigint NOT NULL, 
+    image varchar(160) not null,
     author SMALLINT NOT NULL, 
     file bigint not null, 
     created_at DATETIME DEFAULT NOW(),

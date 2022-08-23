@@ -4,12 +4,19 @@
 use core\Password;
 use core\Uuid;
 use models\Administrator;
-use views\Administrator as ViewsAdministrator;
+use views\administrateur\Administrator as AdministrateurAdministrator;
+use views\administrateur\Home;
+
+    if(isset($_GET['list']) && $_SESSION['USER_SUPER'] == "true" ){
+        
+
+        if(isset($_GET['id']))  print_r((new Administrator())->_get_by_id(intval(htmlspecialchars($_GET['id']))));
+        else print_r((new Administrator())->_get());
+    }
+
+    if(isset($_GET['login'])) (new AdministrateurAdministrator())->_login();
 
 
-   
-
-    if(isset($_GET['list'])) echo "liste";//( new ViewsAdministrator())->_list((new Administrator())->_get());
 
     if(isset($_POST['insert']) && $_SESSION['USER_SUPER'] == "true"){
         
@@ -51,6 +58,7 @@ use views\Administrator as ViewsAdministrator;
 
 
     if(isset($_POST['connect'])){
+        
         $connected = (new Administrator())->_connexion([
 
             "email" => htmlspecialchars($_POST['email']),
@@ -68,10 +76,10 @@ use views\Administrator as ViewsAdministrator;
 
             echo $_SESSION['USER_NAME']. " ". $_SESSION['USER_EMAIL'];
 
-            //(new ViewsAdministrator())->_home();
+           (new Home());
         }
         else{
-            echo " vOUS ETES PAS AUTORISE";
+            (new AdministrateurAdministrator())->_login("Vous n'avez pas de compte ou votre compte est invalide");
 
         };
     }

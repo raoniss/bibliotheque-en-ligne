@@ -11,11 +11,19 @@
 RewriteEngine On # Activer le module Rewrite
 
 # Les controllers   
-
+RewriteRule ^bibal$ controllers/administrator.php?login [L]
 RewriteRule ^ouvrages$ controllers/ouvrage.php [L]
 RewriteRule ^accueil$ controllers/home.php [L]
 RewriteRule ^admins$ controllers/administrator.php [L]
 RewriteRule ^reservations$ controllers/reservation.php [L]
+RewriteRule ^books$ controllers/book.php [L]
+RewriteRule ^categories$ controllers/category.php [L]
+
+
+
+RewriteRule ^books/image/([A-Za-z0-9\-_]+\.[A-Za-z0-9]{3})$ disk/uploads/books/image/$1 [L]
+RewriteRule ^books/pdf/([A-Za-z0-9\-_]+\.[A-Za-z0-9]{3})$ disk/uploads/books/pdf/$1 [L]
+
 
 
 

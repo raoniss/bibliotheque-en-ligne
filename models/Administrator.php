@@ -106,6 +106,24 @@
             }
         }
 
+        public function _get_by_id($_id){
+
+            $data = $this->_query("SELECT * FROM Administrators WHERE id = $_id");
+
+            if($data['status'] == !0){
+
+                return [
+                    'status' => !0,
+                    'data' => $data['data']
+                ];
+            }
+            else{
+                return [
+                    'status' => !1
+                ];
+            }
+        }
+
         public function _get_by_mail($_email){
 
             $data = $this->_query("SELECT * FROM Administrators WHERE email = '$_email'");
