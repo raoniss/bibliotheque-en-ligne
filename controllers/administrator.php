@@ -30,10 +30,11 @@ use views\administrateur\Home;
         ]));
 
         if($insert['status'] == !0) echo $insert['id'] ; ////(new ViewsAdministrator())->_insert();
+        else{
+            (new AdministrateurAdministrator())->_login();
+        }
     }
-    else{
-        (new AdministrateurAdministrator())->_login();
-    }
+    
     
 
     if(isset($_POST['update']) && $_SESSION['USER_SUPER'] == "true"){
@@ -49,6 +50,9 @@ use views\administrateur\Home;
         ]));
 
         if($insert['status'] == !0) echo $insert['id'] ; ////(new ViewsAdministrator())->_list();
+        else{
+            (new AdministrateurAdministrator())->_login();
+        }
     }
 
 
@@ -57,10 +61,11 @@ use views\administrateur\Home;
             "id"=> intval(htmlspecialchars($_POST['id']))  
         ]);
         if($delete['status'] == !0) echo $delete['id']; //(new ViewsAdministrator())->_list();
+        else{
+            (new AdministrateurAdministrator())->_login();
+        }
     }
-    else{
-        (new AdministrateurAdministrator())->_login();
-    }
+    
 
 
     if(isset($_POST['connect'])){
@@ -80,7 +85,7 @@ use views\administrateur\Home;
             $_SESSION['USER_ID'] = $connected['user']['id'];
             $_SESSION['USER_SUPER'] = $connected['user']['super'];
 
-            echo $_SESSION['USER_NAME']. " ". $_SESSION['USER_EMAIL'];
+            //echo $_SESSION['USER_NAME']. " ". $_SESSION['USER_EMAIL'];
 
            (new Home());
         }
@@ -95,13 +100,19 @@ use views\administrateur\Home;
             "uuid"=> htmlspecialchars($_POST['uuid'])
         ]);
 
-        $message = ($enable['status'] == !0) ?  "super set" :"operation failed" ;
+        if($enable['status'] == !0){
+            
+           echo "to passs";
+            
+        }
+        else{
 
-        echo $message;
+            (new AdministrateurAdministrator())->_login();
+        }
+
+       
     }
-    else{
-        (new AdministrateurAdministrator())->_login();
-    }
+    
 
     if(isset($_POST['disable']) && $_SESSION['USER_SUPER'] == "true"){
         $disable = (new Administrator())->_disable_super([
@@ -109,12 +120,23 @@ use views\administrateur\Home;
         ]);
 
         //if($disable['status'] == !0) ;//(new ViewsAdministrator())->_list()
-        $message = ($disable['status'] == !0) ?  "super set" :"operation failed" ;
+        if($disable['status'] == !0){
+            
+                
+            
+        }
+        else{
+            (new AdministrateurAdministrator())->_login();
+        }
 
-        echo $message;
+        
     }
-    else{
+    
+
+    if(isset($_POST['disconnexion']))
+    {
+        session_abort();
+       
         (new AdministrateurAdministrator())->_login();
-    }
-
-    if(isset($_POST['disconnexion'])) session_abort();
+       
+    } 

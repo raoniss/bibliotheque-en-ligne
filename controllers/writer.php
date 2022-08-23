@@ -35,9 +35,7 @@
 
             if($insert['status'] == !0) ; //(new ViewsClient())->_home();
         }
-        else{
-            (new Administrator())->_login();
-        }
+        
 
         if(isset($_POST['delete']) && $_SESSION['USER_SUPER']){
             $delete = (new Writer())->_delete([
@@ -45,9 +43,7 @@
             ]);
             if($delete['status'] == !0) echo $delete['id']; //(new ViewsAdministrator())->_Writer();
         }
-        else{
-            (new Administrator())->_login();
-        }
+       
 
 
 

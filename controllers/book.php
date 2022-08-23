@@ -51,16 +51,12 @@
                     
                 }
 
-            }
-            else{
-
-            }
+                }
+            
        
             
         }
-        else{
-            (new Administrator())->_login();
-        }
+        
 
 
         if(isset($_POST['update']) && $_SESSION['USER_SUPER']){
@@ -105,9 +101,7 @@
             if($insert['status'] == !0) ; //(new ViewsClient())->_home();
             }
         }
-        else{
-            (new Administrator())->_login();
-        }
+        
 
         if(isset($_POST['delete']) && $_SESSION['USER_SUPER']){
             $delete = (new Book())->_delete([
@@ -115,9 +109,7 @@
             ]);
             if($delete['status'] == !0) echo $delete['id']; //(new ViewsAdministrator())->_Books();
         }
-        else{
-            (new Administrator())->_login();
-        }
+        
 
 
 
