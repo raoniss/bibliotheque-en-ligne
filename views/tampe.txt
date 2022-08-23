@@ -1,0 +1,31 @@
+<?php
+
+namespace views;
+require_once('../core/autoloader.php');
+use core\Page;
+
+class Administrator extends Page {
+    public function _login(){
+        $this->_html();
+    }
+    public function _html(){
+        parent::_html();
+
+    }
+    public function _head(){
+        parent::_head();
+        ?>
+<?php
+    }
+    public function _body(){
+        parent::_body();
+        ?>
+
+<?php
+    }
+    public function _foot(){
+        parent::_foot();
+        ?>
+<?php
+    }
+}
