@@ -1,5 +1,5 @@
 
---ADMINISTRATEUR
+--   ADMINISTRATEUR
 CREATE TABLE Administrators(
     id SMALLINT AUTO_INCREMENT NOT NULL,
     uuid VARCHAR(38) NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE Administrators(
 
 ) engine = innodb default charset utf8;
 
---LECTEUR
+--   LECTEUR
 CREATE TABLE Readers(
     id bigint AUTO_INCREMENT NOT NULL,
     uuid VARCHAR(38) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE Readers(
     
 ) engine = innodb default charset utf8;
 
---RESERVATION 
+--   RESERVATION 
 CREATE TABLE Reservations(
     id bigint AUTO_INCREMENT NOT NULL,
     uuid VARCHAR(38) NOT NULL,
@@ -42,16 +42,16 @@ CREATE TABLE Reservations(
     created_at DATETIME DEFAULT NOW(),
     PRIMARY KEY(id),
     CONSTRAINT u_reservations_uuid UNIQUE(uuid),
-    CONSTRAINT fk_reservations_readers FOREIGN KEY(reader) REFERENCES readers(id)
+    CONSTRAINT fk_reservations_readers FOREIGN KEY(reader) REFERENCES Readers(id)
 
 ) engine = innodb default charset utf8;
 
---CATEGORIE
+--   CATEGORIE
 CREATE TABLE Categories(
     id bigint AUTO_INCREMENT NOT NULL,
     uuid VARCHAR(38) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL, -- description 
+    description TEXT NOT NULL, --    description 
     author SMALLINT not null,
     created_at DATETIME DEFAULT NOW(),
     update_at DATETIME DEFAULT NOW(),
@@ -62,12 +62,12 @@ CREATE TABLE Categories(
 
 ) engine = innodb default charset utf8;  
 
---LECTEUR
+--   LECTEUR
 CREATE TABLE Writers(
     id bigint AUTO_INCREMENT NOT NULL,
     uuid VARCHAR(38) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    story TEXT NOT NULL, -- description 
+    story TEXT NOT NULL, --    description 
     author SMALLINT not null,
     created_at DATETIME DEFAULT NOW(),
     update_at DATETIME DEFAULT NOW(),
@@ -79,7 +79,7 @@ CREATE TABLE Writers(
 
 ) engine = innodb default charset utf8;  
 
---FICHIER
+--   FICHIER
 CREATE TABLE  Files(
     id BIGINT auto_increment NOT null,
     uuid varchar(255) not null,
@@ -97,7 +97,7 @@ CREATE TABLE  Files(
 
 
 
--- OUVRAGE
+--    OUVRAGE
 
 CREATE TABLE Books(
     id bigint AUTO_INCREMENT NOT NULL,
@@ -123,12 +123,12 @@ CREATE TABLE Books(
 
 
 
--- CATEGORIE D ABONNEMENT --
+--    CATEGORIE D ABONNEMENT --   
 CREATE TABLE Subscription_categories(
     id bigint AUTO_INCREMENT NOT NULL,
     uuid VARCHAR(38) NOT NULL,
     name varchar(150) not null,
-    author SMALLINT NOT NULL, -- celui qui realise l'action
+    author SMALLINT NOT NULL, --    celui qui realise l'action
     labelle bigint not null,
     day_expire INT not null,
     created_at DATETIME DEFAULT NOW(),
@@ -138,14 +138,14 @@ CREATE TABLE Subscription_categories(
     
 ) engine = innodb default charset utf8;
 
---ABONNEMENT 
+--   ABONNEMENT 
 CREATE TABLE Subscriptions(
     id bigint AUTO_INCREMENT NOT NULL,
     uuid VARCHAR(38) NOT NULL,
     reader bigint NOT NULL,
-    author SMALLINT NOT NULL, -- celui qui realise l'action
+    author SMALLINT NOT NULL, --    celui qui realise l'action
     subscription bigint not null,
-    expires_at DATETIME DEFAULT NOT NULL,
+    expires_at DATETIME  NOT NULL,
     created_at DATETIME DEFAULT NOW(),
     PRIMARY KEY(id),
     CONSTRAINT u_subscription_uuid UNIQUE(uuid),
@@ -156,19 +156,20 @@ CREATE TABLE Subscriptions(
 ) engine = innodb default charset utf8;
 
 
--- EMPRUNT
+--    EMPRUNT
 CREATE TABLE Loans(
     id bigint AUTO_INCREMENT NOT NULL,
     uuid VARCHAR(38) NOT NULL,
     reader BIGINT NOT NULL,
     books longtext not null,
-    author SMALLINT NOT NULL, -- celui qui realise l'action
+    author SMALLINT NOT NULL, --    celui qui realise l'action
     returned ENUM('true','false') NOT NULL,
     returned_at DATETIME DEFAULT NULL,
     created_at DATETIME DEFAULT NOW(),
     PRIMARY KEY(id),
     CONSTRAINT u_loans_uuid UNIQUE(uuid),
     CONSTRAINT fk_loans_administrators FOREIGN KEY(author) REFERENCES Administrators(id),
-    CONSTRAINT fk_loans_reader UNIQUE(reader) REFERENCES Readers(id)
+    CONSTRAINT fk_loans_reader FOREIGN KEY(reader) REFERENCES Readers(id)
 
 ) engine = innodb default charset utf8;
+
