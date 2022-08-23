@@ -26,12 +26,12 @@
             $insert = $this ->_execute(
                 "INSERT INTO Files(uuid, type, extension, size, name, author ) VALUES (:uuid, :type, :extension, :size, :name, :author)",
                 [
-                    ':uuid' => $_data['_uuid'], 
-                    ':type' => $_data['_type'], 
-                    ':extension' => $_data['_extension'], 
-                    ':size' => $_data['_size'],
-                    ':name' => $_data['_name'], 
-                    ':author' => $_data['_author']
+                    ':uuid' => $_data['uuid'], 
+                    ':type' => $_data['type'], 
+                    ':extension' => $_data['extension'], 
+                    ':size' => $_data['size'],
+                    ':name' => $_data['name'], 
+                    ':author' => $_data['author']
                 ]
             );
 

@@ -31,6 +31,9 @@ use views\administrateur\Home;
 
         if($insert['status'] == !0) echo $insert['id'] ; ////(new ViewsAdministrator())->_insert();
     }
+    else{
+        (new AdministrateurAdministrator())->_login();
+    }
     
 
     if(isset($_POST['update']) && $_SESSION['USER_SUPER'] == "true"){
@@ -54,6 +57,9 @@ use views\administrateur\Home;
             "id"=> intval(htmlspecialchars($_POST['id']))  
         ]);
         if($delete['status'] == !0) echo $delete['id']; //(new ViewsAdministrator())->_list();
+    }
+    else{
+        (new AdministrateurAdministrator())->_login();
     }
 
 
@@ -93,6 +99,9 @@ use views\administrateur\Home;
 
         echo $message;
     }
+    else{
+        (new AdministrateurAdministrator())->_login();
+    }
 
     if(isset($_POST['disable']) && $_SESSION['USER_SUPER'] == "true"){
         $disable = (new Administrator())->_disable_super([
@@ -103,6 +112,9 @@ use views\administrateur\Home;
         $message = ($disable['status'] == !0) ?  "super set" :"operation failed" ;
 
         echo $message;
+    }
+    else{
+        (new AdministrateurAdministrator())->_login();
     }
 
     if(isset($_POST['disconnexion'])) session_abort();

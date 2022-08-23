@@ -45,7 +45,7 @@
             [
                 ':uuid' => $_data['uuid'],
                 ':name'=> $_data['name'], 
-                ':first_name' => $_data[':first_name'],
+                ':first_name' => $_data['first_name'],
                 ':email' => $_data['email'],
                 ':password' => $_data['password'],
                 ":update_at" => date('Y-m-d H:i:s'),

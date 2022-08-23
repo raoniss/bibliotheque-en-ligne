@@ -38,12 +38,13 @@ class Category extends DB{
 
 
     public function _update($_data){
-        $insert = $this->_execute("INSERT INTO Categories SET uuid = :uuid, name= :name, description = :description, update_at = :update_at, author = :author WHERE id= :id", [
+        $insert = $this->_execute("UPDATE Categories SET uuid = :uuid, name= :name, description = :description, update_at = :update_at, author = :author WHERE id= :id", [
             ":uuid"=> $_data['uuid'],
             ":name" => $_data['name'],
             ":update_at" => date("Y-m-d H:i-s"),
             ":description" => $_data['description'],
-            ":id" => $_data['id']
+            ":id" => $_data['id'],
+            ":author" => $_data['author']
         ]);
 
         if($insert == !0){

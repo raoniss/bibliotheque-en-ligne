@@ -83,7 +83,7 @@ CREATE TABLE Writers(
 CREATE TABLE  Files(
     id BIGINT auto_increment NOT null,
     uuid varchar(255) not null,
-    type ENUM ('document') not null,
+    type ENUM ('document','image','application') not null,
     extension varchar(10) not null,
     size bigint not null,
     name varchar(160) not null,

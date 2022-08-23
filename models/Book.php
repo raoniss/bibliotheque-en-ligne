@@ -42,7 +42,7 @@ class Book extends DB{
 
 
     public function _update($_data){
-        $insert = $this->_execute("INSERT INTO Books SET uuid = :uuid, name= :name, image = :image, resume=:resume, writer=:writer, category= :categoriy, file=:file, update_at = :update_at, author = :author WHERE id= :id", [
+        $insert = $this->_execute("UPDATE Books SET uuid = :uuid, name= :name, image = :image, resume=:resume, writer=:writer, category= :categoriy, file=:file, update_at = :update_at, author = :author WHERE id= :id", [
             ":uuid"=> $_data['uuid'],
             ":name" => $_data['name'],
             ":image" => $_data['image'],
@@ -51,7 +51,8 @@ class Book extends DB{
             ":writer" => $_data['writer'],
             ":category" => $_data['category'],
             ":file" => $_data['file'],
-            ":id" => $_data['id']
+            ":id" => $_data['id'],
+            ":author" => $_data['author']
         ]);
 
         if($insert == !0){
