@@ -7,7 +7,7 @@ use models\Administrator;
 use views\administrateur\Administrator as AdministrateurAdministrator;
 use views\administrateur\Home;
 
-    if(isset($_GET['list']) && $_SESSION['USER_SUPER'] == "true" ){
+    if(isset($_GET['list']) && $_SESSION['USER_SUPER'] == true ){
         
 
         if(isset($_GET['id']))  print_r((new Administrator())->_get_by_id(intval(htmlspecialchars($_GET['id']))));
@@ -18,7 +18,7 @@ use views\administrateur\Home;
 
 
 
-    if(isset($_POST['insert']) && $_SESSION['USER_SUPER'] == "true"){
+    if(isset($_POST['insert']) && $_POST['user'] == "true"){
         
         $insert = ((new Administrator())->_insert([
             "uuid" => (new Uuid())->_uuid(),
@@ -37,7 +37,7 @@ use views\administrateur\Home;
     
     
 
-    if(isset($_POST['update']) && $_SESSION['USER_SUPER'] == "true"){
+    if(isset($_POST['update'])  ){
         $insert = ((new Administrator())->_update([
             "uuid" => (new Uuid())->_uuid(),
             "name" => htmlspecialchars($_POST['name']),
@@ -56,7 +56,7 @@ use views\administrateur\Home;
     }
 
 
-    if(isset($_POST['delete']) && $_SESSION['USER_SUPER'] == "true"){
+    if(isset($_POST['delete'])  ){
         $delete = (new Administrator())->_delete([
             "id"=> intval(htmlspecialchars($_POST['id']))  
         ]);
@@ -85,7 +85,7 @@ use views\administrateur\Home;
             $_SESSION['USER_ID'] = $connected['user']['id'];
             $_SESSION['USER_SUPER'] = $connected['user']['super'];
 
-            //echo $_SESSION['USER_NAME']. " ". $_SESSION['USER_EMAIL'];
+            //echo $_SESSION['USER_NAME']. " ". $_SESSION['USER_EMAIL']; 
 
            (new Home());
         }
@@ -95,9 +95,9 @@ use views\administrateur\Home;
         };
     }
 
-    if(isset($_POST['enable']) && $_SESSION['USER_SUPER'] == "true"){
+    if(isset($_GET['enable'])  ){
         $enable = (new Administrator())->_enable_super([
-            "uuid"=> htmlspecialchars($_POST['uuid'])
+            "id"=> htmlspecialchars($_POST['id'])
         ]);
 
         if($enable['status'] == !0){
@@ -114,9 +114,9 @@ use views\administrateur\Home;
     }
     
 
-    if(isset($_POST['disable']) && $_SESSION['USER_SUPER'] == "true"){
+    if(isset($_GET['disable']) ){
         $disable = (new Administrator())->_disable_super([
-            "uuid"=> htmlspecialchars($_POST['uuid'])
+            "id"=> htmlspecialchars($_GET['id'])
         ]);
 
         //if($disable['status'] == !0) ;//(new ViewsAdministrator())->_list()
@@ -133,7 +133,7 @@ use views\administrateur\Home;
     }
     
 
-    if(isset($_POST['disconnexion']))
+    if(isset($_GET['disconnexion']))
     {
         session_abort();
        

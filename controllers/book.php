@@ -7,14 +7,14 @@
         use models\File as ModelsFile;
         use views\administrateur\Administrator;
 
-        if(isset($_POST['list']) && $_SESSION['USER_SUPER']) {
+        if(isset($_POST['list'])  ) {
 
             if(isset($_GET['id'])) print_r((new Book())->_get_by_id(intval(htmlspecialchars($_GET['id'])))) ;
             else print_r((new Book())->_get()) ;
             
         }
 
-        if(isset($_POST['insert']) && $_SESSION['USER_SUPER']){
+        if(isset($_POST['insert'])  ){
             $uuid = (new Uuid())->_uuid();
 
             $media = (new File())->_uploade($uuid, $_FILES['pdf'],'../disk/uploads/books/pdf/');
@@ -59,7 +59,7 @@
         
 
 
-        if(isset($_POST['update']) && $_SESSION['USER_SUPER']){
+        if(isset($_POST['update'])  ){
             
             $uuid = (new Uuid())->_uuid();
 
@@ -103,7 +103,7 @@
         }
         
 
-        if(isset($_POST['delete']) && $_SESSION['USER_SUPER']){
+        if(isset($_GET['delete'])  ){
             $delete = (new Book())->_delete([
                 "id"=> intval(htmlspecialchars($_POST['id']))  
             ]);

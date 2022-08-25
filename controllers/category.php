@@ -1,13 +1,17 @@
 <?php
         require_once('../core/autoloader.php');
 
+        $req_mod = $_REQUEST['methode'];
         use core\Uuid;
         use models\Category;
         use views\administrateur\Administrator;
 
-        if(isset($_GET['list']) && $_SESSION['USER_SUPER']) print_r((new Category())->_get()) ;
 
-        if(isset($_POST['insert']) && $_SESSION['USER_SUPER']){
+        
+
+        if(isset($_GET['list'])  ) print_r((new Category())->_get()) ;
+
+        if(isset($_POST['insert'])  ){
             
             $insert = (new Category())->_insert([
                 "uuid"=> (new Uuid())->_uuid(),
@@ -21,7 +25,7 @@
        
 
 
-        if(isset($_POST['update']) && $_SESSION['USER_SUPER']){
+        if(isset($_POST['update'])  ){
             
             $update = (new Category())->_update([
                 "uuid"=> (new Uuid())->_uuid(),
@@ -35,7 +39,7 @@
         }
         
 
-        if(isset($_POST['delete']) && $_SESSION['USER_SUPER']){
+        if(isset($_POST['delete'])  ){
             $delete = (new Category())->_delete([
                 "id"=> intval(htmlspecialchars($_POST['id']))  
             ]);

@@ -24,6 +24,7 @@ CREATE TABLE Readers(
     name VARCHAR(230) NOT NULL,
     first_name VARCHAR(230) NOT NULL,
     email VARCHAR(230) NOT NULL,
+    telephone INT(30) not null,
     password VARCHAR(62) NOT NULL,
     created_at DATETIME DEFAULT NOW(),
     update_at DATETIME DEFAULT NOW(),
@@ -130,7 +131,7 @@ CREATE TABLE Subscription_categories(
     uuid VARCHAR(38) NOT NULL,
     name varchar(150) not null,
     author SMALLINT NOT NULL, --    celui qui realise l'action
-    labelle bigint not null,
+    prix  float not null,
     day_expire INT not null,
     created_at DATETIME DEFAULT NOW(),
     update_at DATETIME DEFAULT NOW(),
