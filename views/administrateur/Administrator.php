@@ -15,13 +15,13 @@ class Administrator extends Page {
     public function _head(){
         parent::_head();
         ?>
-<link rel="stylesheet" href="../public/css/app.min.css">
-<link rel="stylesheet" href="../public/bundles/bootstrap-social/bootstrap-social.css">
+<link rel="stylesheet" href="public/css/app.min.css">
+<link rel="stylesheet" href="public/bundles/bootstrap-social/bootstrap-social.css">
 <!-- Template CSS -->
-<link rel="stylesheet" href="../public/css/style.css">
-<link rel="stylesheet" href="../public/css/components.css">
+<link rel="stylesheet" href="public/css/style.css">
+<link rel="stylesheet" href="public/css/components.css">
 <!-- Custom style CSS -->
-<link rel="stylesheet" href="../public/css/custom.css">
+<link rel="stylesheet" href="public/css/custom.css">
 <link rel='shortcut icon' type='image/x-icon' href='../public/img/favicon.ico' />
 <?php
     }
@@ -39,7 +39,7 @@ class Administrator extends Page {
                             <h4>Login</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="../admins" class="needs-validation" novalidate="">
+                            <form method="POST" action="admins" class="needs-validation" novalidate="">
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input id="email" type="email" class="form-control" name="email" tabindex="1"
@@ -107,13 +107,13 @@ class Administrator extends Page {
     public function _foot(){
         parent::_foot();
         ?>
-<script src="../public/js/app.min.js"></script>
+<script src="public/js/app.min.js"></script>
 <!-- JS Libraies -->
 <!-- Page Specific JS File -->
 <!-- Template JS File -->
-<script src="../public/js/scripts.js"></script>
+<script src="public/js/scripts.js"></script>
 <!-- Custom JS File -->
-<script src="../public/js/custom.js"></script>
+<script src="public/js/custom.js"></script>
 <?php
     }
 }
