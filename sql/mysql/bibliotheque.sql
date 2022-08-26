@@ -131,7 +131,7 @@ CREATE TABLE Subscription_categories(
     uuid VARCHAR(38) NOT NULL,
     name varchar(150) not null,
     author SMALLINT NOT NULL, --    celui qui realise l'action
-    prix  float not null,
+    price  float not null,
     day_expire INT not null,
     created_at DATETIME DEFAULT NOW(),
     update_at DATETIME DEFAULT NOW(),

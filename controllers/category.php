@@ -1,4 +1,5 @@
 <?php
+session_start();
         require_once('../core/autoloader.php');
 
         $req_mod = $_REQUEST['methode'];
@@ -9,7 +10,15 @@
 
         
 
-        if(isset($_GET['list'])  ) print_r((new Category())->_get()) ;
+        if(isset($_GET['list'])  ){
+
+            if(isset($_POST['id'])){
+                print_r((new Category())->_get_by_id(intval(htmlspecialchars($_GET['id'])))) ;
+            }
+            else{
+                print_r((new Category())->_get()) ;
+            }
+        }
 
         if(isset($_POST['insert'])  ){
             

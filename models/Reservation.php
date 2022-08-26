@@ -33,7 +33,7 @@ class Reservation extends DB{
         }
     }
 
-    //La methode suivantre ne sera pas utilisée
+    /*La methode suivantre ne sera pas utilisée
 
     public function _update($_data){
         $insert = $this->_execute("INSERT INTO Reservations(uuid, reader, books)", [
@@ -76,7 +76,7 @@ class Reservation extends DB{
                 'status' => !1,                  
             ];
         }
-    }
+    }*/
 
     public function _get(){
         $data = $this->_query("SELECT * FROM Reservations");
@@ -102,6 +102,45 @@ class Reservation extends DB{
             return [
                 'status' => !0,
                 'id' => $data['data'][0]["id"]
+            ];
+        }else{
+            return  [
+                'status' => !1,
+                
+            ];
+        }
+    }
+
+    public function _get_by_id( $_id ){
+        
+        $data = $this -> _query(" SELECT * FROM Reservations WHERE id = '$_id' ");
+
+        if($data['status'] == !0){
+            return [
+                'status' => !0,
+                'id' => $data['data']
+            ];
+        }else{
+            return  [
+                'status' => !1,
+                
+            ];
+        }
+    }
+
+    public function _get_by_date( $_date ){
+        
+        $data = $this -> _query(" SELECT * FROM Reservations WHERE created_at = '$_date' ");
+
+        if($data['status'] == !0){
+            return [
+                'status' => !0,
+                'id' => $data['data']
+            ];
+        }else{
+            return  [
+                'status' => !1,
+                
             ];
         }
     }

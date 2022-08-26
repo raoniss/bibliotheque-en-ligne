@@ -1,4 +1,5 @@
 <?php
+session_start();
         require_once('../core/autoloader.php');
 
         use core\Uuid;
@@ -9,12 +10,22 @@
 
         if(isset($_POST['list'])  ) {
 
-            if(isset($_GET['id'])) print_r((new Book())->_get_by_id(intval(htmlspecialchars($_GET['id'])))) ;
-            else print_r((new Book())->_get()) ;
+            if(isset($_GET['id'])) {
+
+                if($_SESSION['USER_SUPER']) print_r((new Book())->_get_by_id(intval(htmlspecialchars($_GET['id'])))) ;  // vue d'un admin
+                elseif($_SESSION['USER_READER']) print_r((new Book())->_get_by_id(intval(htmlspecialchars($_GET['id'])))) ;  // vue d'un lecteur
+                else  echo "error";
+            } 
+            else{
+                if($_SESSION['USER_SUPER']) print_r((new Book())->_get()) ; // vue d'un admin
+                elseif($_SESSION['USER_READER']) print_r((new Book())->_get()) ;  // vue d'un lecteur
+            }
             
         }
+        else echo 'Access Error Please login';
 
-        if(isset($_POST['insert'])  ){
+
+        if(isset($_POST['insert']) && isset($_SESSION['USER_SUPER'])  ){
             $uuid = (new Uuid())->_uuid();
 
             $media = (new File())->_uploade($uuid, $_FILES['pdf'],'../disk/uploads/books/pdf/');
@@ -49,6 +60,7 @@
         
                     if($insert['status'] == !0) echo $insert['id'] ; 
                     
+                    
                 }
 
                 }
@@ -56,10 +68,12 @@
        
             
         }
+        else echo 'Access Error Please login';
+
         
 
 
-        if(isset($_POST['update'])  ){
+        if(isset($_POST['update']) && isset($_SESSION['USER_SUPER'])  ){
             
             $uuid = (new Uuid())->_uuid();
 
@@ -101,14 +115,16 @@
             if($insert['status'] == !0) ; //(new ViewsClient())->_home();
             }
         }
+        else  echo "error";
         
 
-        if(isset($_GET['delete'])  ){
+        if(isset($_GET['delete']) && isset($_SESSION['USER_SUPER'])  ){
             $delete = (new Book())->_delete([
                 "id"=> intval(htmlspecialchars($_POST['id']))  
             ]);
             if($delete['status'] == !0) echo $delete['id']; //(new ViewsAdministrator())->_Books();
         }
+        else  echo "error";
         
 
 

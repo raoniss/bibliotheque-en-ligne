@@ -1,5 +1,6 @@
 <?php
-    require_once('../core/autoloader.php');
+session_start();
+require_once('../core/autoloader.php');
     
 use core\Password;
 use core\Uuid;
@@ -18,7 +19,7 @@ use views\administrateur\Home;
 
 
 
-    if(isset($_POST['insert']) && $_POST['user'] == "true"){
+    if(isset($_POST['insert']) && $_SESSION['USER_SUPER'] == true){
         
         $insert = ((new Administrator())->_insert([
             "uuid" => (new Uuid())->_uuid(),
@@ -37,7 +38,7 @@ use views\administrateur\Home;
     
     
 
-    if(isset($_POST['update'])  ){
+    if(isset($_POST['update']) && $_SESSION['USER_SUPER']   ){
         $insert = ((new Administrator())->_update([
             "uuid" => (new Uuid())->_uuid(),
             "name" => htmlspecialchars($_POST['name']),
@@ -56,7 +57,7 @@ use views\administrateur\Home;
     }
 
 
-    if(isset($_POST['delete'])  ){
+    if(isset($_POST['delete']) && $_SESSION['USER_SUPER'] == true ){
         $delete = (new Administrator())->_delete([
             "id"=> intval(htmlspecialchars($_POST['id']))  
         ]);
@@ -68,7 +69,7 @@ use views\administrateur\Home;
     
 
 
-    if(isset($_POST['connect'])){
+    if(isset($_POST['connect']) ){
         
         $connected = (new Administrator())->_connexion([
 
@@ -77,7 +78,7 @@ use views\administrateur\Home;
         ]);
 
         if($connected['status'] == !0){
-            session_start();
+            
             $_SESSION['USER_UUID'] = $connected['user']['uuid'];
             $_SESSION['USER_NAME'] = $connected['user']['name'];
             $_SESSION['USER_FIRST_NAME'] = $connected['user']['first_name'];
@@ -95,7 +96,7 @@ use views\administrateur\Home;
         };
     }
 
-    if(isset($_GET['enable'])  ){
+    if(isset($_GET['enable']) && $_SESSION['USER_SUPER'] == true ){
         $enable = (new Administrator())->_enable_super([
             "id"=> htmlspecialchars($_POST['id'])
         ]);
@@ -114,7 +115,7 @@ use views\administrateur\Home;
     }
     
 
-    if(isset($_GET['disable']) ){
+    if(isset($_GET['disable']) && $_SESSION['USER_SUPER'] == true){
         $disable = (new Administrator())->_disable_super([
             "id"=> htmlspecialchars($_GET['id'])
         ]);
@@ -133,7 +134,7 @@ use views\administrateur\Home;
     }
     
 
-    if(isset($_GET['disconnexion']))
+    if(isset($_GET['disconnexion']) && $_SESSION['USER_SUPER'] )
     {
         session_abort();
        

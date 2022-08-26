@@ -92,7 +92,7 @@ class Book extends DB{
 
 
     public function _get(){
-        $data = $this->_query("SELECT Books.*, concat(Files.uuid, Files.extension) as files, Categories.name as categorie_name, Categories.id as categorie_id, Writers.id as writer_id, Writers.name as writer_name FROM Books INNER JOIN Files ON Books.file = Files.id INNER JOIN  Categories ON Books.category = Categories.id INNER JOIN  Writers ON Books.writer = Writers.id");
+        $data = $this->_query("SELECT Books.*, concat(Files.uuid,'.' Files.extension) as files, Categories.name as categorie_name, Categories.id as categorie_id, Writers.id as writer_id, Writers.name as writer_name FROM Books INNER JOIN Files ON Books.file = Files.id INNER JOIN  Categories ON Books.category = Categories.id INNER JOIN  Writers ON Books.writer = Writers.id");
 
         if($data['status'] == !0){
 
@@ -133,6 +133,11 @@ class Book extends DB{
             return [
                 'status' => !0,
                 'id' => $data['data'][0]["id"]
+            ];
+        }else{
+            return  [
+                'status' => !1,
+                
             ];
         }
     }

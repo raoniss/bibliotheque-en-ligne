@@ -1,11 +1,19 @@
 <?php
+session_start();
         require_once('../core/autoloader.php');
 
         use core\Uuid;
         use models\Writer;
         use views\administrateur\Administrator;
 
-        if(isset($_POST['list']) && $_SESSION['USER_SUPER']) print_r((new Writer())->_get()) ;
+        if(isset($_GET['writers']) && $_SESSION['USER_SUPER']) {
+            if(isset($_GET['id']))  print_r((new Writer())->_get_by_id(intval(htmlspecialchars($_GET['id'])))) ;
+            elseif(isset($_GET['name']))  print_r((new Writer())->_get_by_name(intval(htmlspecialchars($_GET['name'])))) ;
+
+        }
+        
+        
+        print_r((new Writer())->_get()) ;
 
         if(isset($_POST['insert']) && $_SESSION['USER_SUPER']){
             

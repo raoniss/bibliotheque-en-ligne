@@ -108,6 +108,26 @@ class Category extends DB{
                 'status' => !0,
                 'id' => $data['data'][0]["id"]
             ];
+        }else{
+            return  [
+                'status' => !1,
+                
+            ];
+        }
+    }
+
+    public function _get_by_id( $_id ){
+        
+        $data = $this -> _query(" SELECT * FROM Categories WHERE id = '$_id' ");
+
+        if($data['status'] == !0){
+            return [
+                'status' => !0,
+                'id' => $data['data']
+            ];
+        }
+        else{
+            return ['status'=>!1] ;
         }
     }
 }

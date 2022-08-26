@@ -1,10 +1,18 @@
 <?php
+session_start();
         require_once('../core/autoloader.php');
 
         use core\Uuid;
         use models\Reservation;
 
-        if(isset($_POST['list'])) ;//(new ViewsReservation())->_list((new Reservation())->_get());
+        if(isset($_GET['reservations'])){
+            if(isset($_POST['id'])){
+                print_r((new Reservation())->_get_by_id(intval(htmlspecialchars($_GET['id'])))) ;
+            }
+            else{
+                print_r((new Reservation())->_get()) ;
+            }
+        } ;//(new ViewsReservation())->_list((new Reservation())->_get());
 
         if(isset($_POST['insert'])){
             
@@ -17,12 +25,7 @@
             if($insert['status'] == !0) ; //(new ViewsClient())->_home();
         }
 
-        if(isset($_POST['delete']) && $_SESSION['USER_SUPER']){
-            $delete = (new Reservation())->_delete([
-                "id"=> intval(htmlspecialchars($_POST['id']))  
-            ]);
-            if($delete['status'] == !0) echo $delete['id']; //(new ViewsAdministrator())->_reservation();
-        }
+
 
 
 

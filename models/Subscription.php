@@ -83,7 +83,7 @@ class Subscription extends DB{
 
 */
     public function _get(){
-        $data = $this->_query("SELECT * FROM Subscriptions");
+        $data = $this->_query("SELECT Subscriptions.* , Readers.name, Subscriptions_category.name as category FROM Subscriptions INNER JOIN Readers ON Readers.id = Subscriptions.reader INNER JOIN Subscription_category ON  Subscriptions.subscription = Subscription_category.id ");
         if($data['status'] == !0){
 
             return [
@@ -107,6 +107,58 @@ class Subscription extends DB{
                 'status' => !0,
                 'id' => $data['data'][0]["id"]
             ];
+        }else{
+            return  [
+                'status' => !1,
+                
+            ];
         }
     }
+
+    public function _get_by_id( $_uuid ){
+        
+        $data = $this -> _query(" SELECT Subscriptions.* , concat(Readers.name,'  ' ,Readers.first_name) as reader, Subscriptions_category.name as category FROM Subscriptions INNER JOIN Readers ON Readers.id = Subscriptions.reader INNER JOIN Subscription_category ON  Subscriptions.subscription = Subscription_category.id  WHERE uuid = '$_uuid' ");
+
+        if($data['status'] == !0){
+            return [
+                'status' => !0,
+                'id' => $data['data'][0]["id"]
+            ];
+        }else{
+            return  [
+                'status' => !1,
+                
+            ];
+        }
+    }
+
+    public function _get_by_date( $_date ){
+        
+        $data = $this -> _query(" SELECT Subscriptions.* , concat(Readers.name,'  ' ,Readers.first_name) as reader, Subscriptions_category.name as category FROM Subscriptions INNER JOIN Readers ON Readers.id = Subscriptions.reader INNER JOIN Subscription_category ON  Subscriptions.subscription = Subscription_category.id  WHERE created_at = '$_date' ");
+
+        if($data['status'] == !0){
+            return [
+                'status' => !0,
+                'id' => $data['data']
+            ];
+        }
+    }
+
+    public function _get_by_reader( $_reader ){
+        
+        $data = $this -> _query(" SELECT Subscriptions.* , concat(Readers.name,'  ' ,Readers.first_name) as reader,Readers.id as reader_id,  Subscriptions_category.name as category FROM Subscriptions INNER JOIN Readers ON Readers.id = Subscriptions.reader INNER JOIN Subscription_category ON  Subscriptions.subscription = Subscription_category.id  WHERE reader = $_reader ");
+
+        if($data['status'] == !0){
+            return [
+                'status' => !0,
+                'id' => $data['data']
+            ];
+        }else{
+            return  [
+                'status' => !1,
+                
+            ];
+        }
+    }
+
 }
